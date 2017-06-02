@@ -16,7 +16,7 @@ export class AppComponent {
   
   constructor(private _clipsService: ClipsService) {}
 
-  ngOnInit() { debugger
+  ngOnInit() { 
     this.allClips = this._clipsService.getAllClips();
     this.groupedViseoClips =  this._clipsService.createStandardClips();
     this.calculateTotalFF = this._clipsService.calculateframeRating();
