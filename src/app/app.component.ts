@@ -7,7 +7,27 @@ import { ClipsService } from './clips.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+
+  // 02-06-2017
+  allClips: any;
+  groupedViseoClips: any;
+
+  calculateTotalFF: any;
+  
+  constructor(private _clipsService: ClipsService) {}
+
+  ngOnInit() { debugger
+    this.allClips = this._clipsService.getAllClips();
+    this.groupedViseoClips =  this._clipsService.createStandardClips();
+    this.calculateTotalFF = this._clipsService.calculateframeRating();
+
+    console.log(this.calculateTotalFF);
+  }
+
+
+  
+  // end
+  title = '';
 
   clips = {};
 
@@ -26,16 +46,26 @@ export class AppComponent {
   clipsNTSCDefinitionSD:any[];
   clipsNTSCDefinitionHD:any[];
 
+   clipsPALDefinitionSDlength: number;
+   clipsPALDefinitionHDlength : number;
+   clipsNTSCDefinitionSDlength: number;
+   clipsNTSCDefinitionHDlength : number; 
+
   //reel
   reelHD:any[];
   reelSD:any[];
 
   //time
-  hh:any[]; mm:any[]; ss:any[]; ff:any[]; totalHH:number; totalMM:number; totalSS:number; totalFF:number;
+  hh:any[]; mm:any[]; ss:any[]; ff:any[]; totalHH:number; totalMM:number; totalSS:number; totalFF:string;
   
-  constructor(private _clipsService: ClipsService) {}
+  //constructor(private _clipsService: ClipsService) {}
 
-  ngOnInit() {
+  /*ngOnInit() {
+
+    this._clipsService.readAll()
+      .subscribe((data) => { 
+        this.clips = data;
+      })
     
     this.getClipsDefinition();
     this.getClipsStandard();
@@ -44,12 +74,14 @@ export class AppComponent {
     
     this.getStandardClipsTime("PAL", "SD");
     this.getStandardClipsTime("NTSC", "SD");
-    
-  }
+
+    this.framesRatingCount("NTSC", 43);
+
+  }*/
 
 
   //find video clips Definition 
-  getClipsDefinition(){
+  getClipsDefinition(){ 
     this._clipsService.readAll()
       .subscribe((data) => {
         this.clips = data;
@@ -116,11 +148,39 @@ export class AppComponent {
         console.log(this.clipsPALDefinitionHD);
         console.log(this.clipsNTSCDefinitionSD);
         console.log(this.clipsNTSCDefinitionHD);
+
+        this.clipsPALDefinitionSDlength = this.clipsPALDefinitionSD.length;
+        this.clipsPALDefinitionHDlength = this.clipsPALDefinitionHD.length;
+        this.clipsNTSCDefinitionSDlength = this.clipsNTSCDefinitionSD.length;
+        this.clipsNTSCDefinitionHDlength = this.clipsNTSCDefinitionHD.length;
         
         
       })
   }
 
+  //frames count
+  framesRatingCount(definition, framesCount) {
+      
+      var quotient, remainder;
+      this._clipsService.readAll()
+      .subscribe((data) => {
+        this.clips = data;
+        this.totalFF;
+    
+        if(definition === "PAL") {
+          quotient = Math.floor(framesCount/25) < 10 ? "0"+Math.floor(framesCount / 25) : Math.floor(framesCount / 25);
+          remainder = (framesCount % 25) < 10 ? "0"+Math.floor(framesCount % 25) : Math.floor(framesCount % 25);
+        } else {
+          quotient = Math.floor(framesCount/30) < 10 ? "0"+Math.floor(framesCount / 30) : Math.floor(framesCount / 30);
+          remainder = (framesCount % 30) < 10 ? "0"+Math.floor(framesCount % 30) : Math.floor(framesCount % 30);
+        }
+        
+        var totalFF = quotient+":"+remainder;
+        console.log(totalFF);
+
+      });
+  
+  }
   //total duration displayed is 00:02:11:01 when I add all the PAL SD video clips
   //total duration displayed is 00:00:54:08 when I add all the NTSC SD video clips
   getStandardClipsTime(clipStandard:string, clipDefinition:string) { 
@@ -137,7 +197,7 @@ export class AppComponent {
         this.totalHH = 0;
         this.totalMM = 0;
         this.totalSS = 0;
-        this.totalFF = 0;
+        
 
         for (let val in this.clips) { 
             let obj = this.clips[val];
@@ -163,12 +223,18 @@ export class AppComponent {
         console.log(this.clipsEndTimeArr); 
         //console.log(this.hh);
         console.log(this.totalHH);
+        var hours = Math.floor(this.totalHH / 3600) < 10 ? ("00" + Math.floor(this.totalHH / 3600)).slice(-2) : Math.floor(this.totalHH / 3600);
+        console.log(hours);
        // console.log(this.mm);
         console.log(this.totalMM);
+        var minutes = ("00" + Math.floor((this.totalMM % 3600) / 60)).slice(-2);
+        console.log(minutes);
        // console.log(this.ss);
         console.log(this.totalSS);
+        var seconds = ("00" + (this.totalSS % 3600) % 60).slice(-2);
+        console.log(seconds);
        // console.log(this.ff);
-        console.log(this.totalFF);
+        //console.log(this.totalFF);
 
       });
   }
