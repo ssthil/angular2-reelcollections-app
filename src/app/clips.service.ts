@@ -158,8 +158,9 @@ export class ClipsService {
           this.clipsSplitEndTimeArr = this.clipsEndTimeArr[i].split(":");
           ff.push(this.clipsSplitEndTimeArr[3]);
       }
-              
-      return ff;
+
+      var totalFFarray = ff.reduce((a,b) => a+ parseFloat(b), 0);      
+      return totalFFarray;
    }
 
 }
