@@ -1,29 +1,53 @@
 import { Component } from '@angular/core';
 import { ClipsService } from './clips.service';
+import { ReelTitle } from './reelTitle';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+
 export class AppComponent {
 
   // 02-06-2017
   allClips: any;
   groupedViseoClips: any;
 
-  calculateTotalFF: any;
+  calculateTotalFFPAL: any;
+  calculateTotalFFNTSC: any;
+  calculateframeRatingPAL: any;
+  calculateframeRatingNTSC: any;
   
   constructor(private _clipsService: ClipsService) {}
 
   ngOnInit() { 
     this.allClips = this._clipsService.getAllClips();
     this.groupedViseoClips =  this._clipsService.createStandardClips();
-    this.calculateTotalFF = this._clipsService.calculateframeRating();
+    this.calculateTotalFFPAL = this._clipsService.calculateTotalFFPAL();
+    //this.calculateTotalFFNTSC = this._clipsService.calculateTotalFFNTSC();
 
-    console.log(this.calculateTotalFF);
+    this.calculateframeRatingPAL = this._clipsService.calculateframeRatingPAL("SD", "PAL");
+    this.calculateframeRatingNTSC = this._clipsService.calculateframeRatingNTSC("SD", "NTSC");
+
+    console.log(this.calculateTotalFFPAL);
+    //console.log(this.calculateTotalFFNTSC);
+    console.log(this.groupedViseoClips)
+    console.log(this.calculateframeRatingPAL);
+    console.log(this.calculateframeRatingNTSC); 
+
+    this.getStandardClipsTime("PAL", "SD");
+    this.getStandardClipsTime("NTSC", "SD");
   }
 
+  reel: ReelTitle ={
+    title1:'Selected clips for NTSC HD',
+    title2:'Selected clips for NTSC SD',
+    title3:'Selected clips for PAL SD',
+    title4:'Selected clips for PAL HD'
+  }
+  
 
   
   // end
@@ -58,26 +82,6 @@ export class AppComponent {
   //time
   hh:any[]; mm:any[]; ss:any[]; ff:any[]; totalHH:number; totalMM:number; totalSS:number; totalFF:string;
   
-  //constructor(private _clipsService: ClipsService) {}
-
-  /*ngOnInit() {
-
-    this._clipsService.readAll()
-      .subscribe((data) => { 
-        this.clips = data;
-      })
-    
-    this.getClipsDefinition();
-    this.getClipsStandard();
-
-    this.createStandardClips("PAL", "SD");
-    
-    this.getStandardClipsTime("PAL", "SD");
-    this.getStandardClipsTime("NTSC", "SD");
-
-    this.framesRatingCount("NTSC", 43);
-
-  }*/
 
 
   //find video clips Definition 
@@ -212,31 +216,35 @@ export class AppComponent {
           this.hh.push(clipsSplitEndTimeArr[0]);
           this.mm.push(clipsSplitEndTimeArr[1]);
           this.ss.push(clipsSplitEndTimeArr[2]);
-          this.ff.push(clipsSplitEndTimeArr[3]);
+          
         }
         for(let i=0; i<this.ss.length; i++) { 
           this.totalHH +=parseFloat(this.hh[i]);
           this.totalMM +=parseFloat(this.mm[i]);
-          this.totalSS +=parseFloat(this.ss[i]);
-          this.totalFF +=parseFloat(this.ff[i]);
+          this.totalSS +=parseFloat(this.ss[i]); 
+          
         }
-        console.log(this.clipsEndTimeArr); 
+        //console.log(this.clipsEndTimeArr); 
         //console.log(this.hh);
-        console.log(this.totalHH);
-        var hours = Math.floor(this.totalHH / 3600) < 10 ? ("00" + Math.floor(this.totalHH / 3600)).slice(-2) : Math.floor(this.totalHH / 3600);
-        console.log(hours);
+        //console.log(this.totalHH);
+        //this.totalHH = 1;
+        var hours = Math.floor(this.totalHH / 3600)* 60 < 10 ? ("00" + Math.floor(this.totalHH / 3600) * 60).slice(-2) : Math.floor(this.totalHH / 3600)* 60;
+        console.log("Hours: "+ hours);
        // console.log(this.mm);
-        console.log(this.totalMM);
-        var minutes = ("00" + Math.floor((this.totalMM % 3600) / 60)).slice(-2);
-        console.log(minutes);
+        //console.log(this.totalMM);
+        var minutes = ("00" + Math.floor(((this.totalMM*60) % 3600) / 60) * 60).slice(-2);
+       // console.log("Mins: "+minutes);
        // console.log(this.ss);
-        console.log(this.totalSS);
-        var seconds = ("00" + (this.totalSS % 3600) % 60).slice(-2);
-        console.log(seconds);
+       // console.log(this.totalSS);
+        var seconds = ("00" + (this.totalSS % 3600) ).slice(-2);
+        
+        var totalMinutes = Number(hours)+Number(minutes)+Number(seconds);
        // console.log(this.ff);
         //console.log(this.totalFF);
+        return (totalMinutes-(totalMinutes%=60))/60 + (9 < totalMinutes?':':':0')+ totalMinutes;
 
       });
   }
+
   
 }

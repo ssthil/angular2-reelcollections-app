@@ -94,22 +94,22 @@ export class ClipsService {
   }
 };
 
-  //private selectedPALSDClips: string[];
- // private selectedPALHDClips: string[];
-
-  //private selectedNTSCSDClips: string[];
- // private selectedNTSCHDClips: string[];
-
-  reelList = {
+reelList = {
     selectedPALSDClips:[],
     selectedPALHDClips:[],
     selectedNTSCSDClips:[],
     selectedNTSCHDClips: []
   };
 
-  totalFF;
-  clipsEndTimeArr;
-  clipsSplitEndTimeArr;
+  totalFFPAL;
+  totalFFNTSC;
+  clipsEndTimeArrPAL;
+  clipsEndTimeArrNTSC;
+  clipsSplitEndTimeArrPAL;
+  clipsSplitEndTimeArrNTSC;
+
+  totalFFarrayPAL;
+  totalFFarrayNTSC;
 
   getAllClips(): any {
     return this.videoclips;   
@@ -128,39 +128,83 @@ export class ClipsService {
     return this.reelList;
   }
 
-  //calculate frame count
-   calculateframeRating(): any { 
+  // FF count PAL SD
+   calculateframeRatingPAL(clipStandard:string, clipDefinition:string): any {   
+      var obj;
+    
+      for(let val in this.videoclips) {  
+          obj = this.videoclips[val]; 
+      
+        if(obj.Definition === clipStandard) { 
+          if(obj.Standard === clipDefinition) { 
+            let ffQuotientForSeconds, ffRemainder, framesCount: number, ff=[]; 
+              for(let i=0; i<this.clipsEndTimeArrPAL.length; i++) {
+                this.clipsSplitEndTimeArrPAL = this.clipsEndTimeArrPAL[i].split(":");
+                ff.push(this.clipsSplitEndTimeArrPAL[3]);
+              }
+              this.totalFFarrayPAL = ff.reduce((a,b) => a+ parseFloat(b), 0);      
+       
+              framesCount = 25;
+              ffQuotientForSeconds = Math.floor(this.totalFFarrayPAL / framesCount) < 10 ? "0"+Math.floor(this.totalFFarrayPAL / framesCount) : Math.floor(this.totalFFarrayPAL / framesCount);
+              ffRemainder = (this.totalFFarrayPAL % framesCount) < 10 ? "0"+Math.floor(this.totalFFarrayPAL % framesCount) : Math.floor(this.totalFFarrayPAL % framesCount);
+            
+              this.totalFFPAL = ffQuotientForSeconds+":"+ffRemainder;
+          }   
+        }
+      }
+      return this.totalFFPAL;
 
-      var ffQuotientForSeconds, ffRemainder, framesCount: number, ff=[]; 
-      this.clipsEndTimeArr=[];
-
-      for(let val in this.videoclips) {
-          let obj = this.videoclips[val]; 
-
-          if(obj.Standard === "PAL") { 
-
-              this.clipsEndTimeArr.push(obj.End); 
-
-             // framesCount = 25;
-             // ffQuotientForSeconds = Math.floor(framesCount / framesCount) < 10 ? "0"+Math.floor(framesCount / framesCount) : Math.floor(framesCount / framesCount);
-             // ffRemainder = (framesCount % framesCount) < 10 ? "0"+Math.floor(framesCount % framesCount) : Math.floor(framesCount % framesCount);
-          }// else {
-             // framesCount = 30;
-             // ffQuotientForSeconds = Math.floor(framesCount/30) < 10 ? "0"+Math.floor(framesCount / 30) : Math.floor(framesCount / 30);
-             // ffRemainder = (framesCount % 30) < 10 ? "0"+Math.floor(framesCount % 30) : Math.floor(framesCount % 30);
-         // }
-
-         // return this.totalFF = ffQuotientForSeconds+":"+ffRemainder;
-         
+   }
+   
+   // FF count NTSC SD
+   calculateframeRatingNTSC(clipStandard:string, clipDefinition:string): any {  
+ 
+    var obj;
+    
+      for(let val in this.videoclips) {  
+          obj = this.videoclips[val]; 
+      
+        if(obj.Definition === clipStandard) { 
+          if(obj.Standard === clipDefinition) { 
+              let ffQuotientForSeconds, ffRemainder, framesCount: number, ff=[]; 
+              for(let i=0; i<this.clipsEndTimeArrNTSC.length; i++) {
+                this.clipsSplitEndTimeArrNTSC = this.clipsEndTimeArrNTSC[i].split(":");
+                ff.push(this.clipsSplitEndTimeArrNTSC[3]);
+              }
+              this.totalFFarrayNTSC = ff.reduce((a,b) => a+ parseFloat(b), 0);      
+              // return this.totalFFarrayNTSC; 
+              framesCount = 30;
+              ffQuotientForSeconds = Math.floor(this.totalFFarrayNTSC/framesCount) < 10 ? "0"+Math.floor(this.totalFFarrayNTSC / framesCount) : Math.floor(this.totalFFarrayNTSC / framesCount);
+              ffRemainder = (this.totalFFarrayNTSC % framesCount) < 10 ? "0"+Math.floor(this.totalFFarrayNTSC % framesCount) : Math.floor(this.totalFFarrayNTSC % framesCount);
+            
+              this.totalFFNTSC = ffQuotientForSeconds+":"+ffRemainder; 
+          } 
+        }
       }
 
-      for(let i=0; i<this.clipsEndTimeArr.length; i++) {
-          this.clipsSplitEndTimeArr = this.clipsEndTimeArr[i].split(":");
-          ff.push(this.clipsSplitEndTimeArr[3]);
-      }
+      return this.totalFFNTSC;
 
-      var totalFFarray = ff.reduce((a,b) => a+ parseFloat(b), 0);      
-      return totalFFarray;
    }
 
+  //calculate frame count
+   calculateTotalFFPAL(): any { 
+
+      this.clipsEndTimeArrPAL=[];
+      this.clipsEndTimeArrNTSC=[];
+      var obj;
+
+      for(let val in this.videoclips) {  
+          obj = this.videoclips[val]; 
+
+          if(obj.Definition === "SD") { 
+            if(obj.Standard === "PAL") {
+                this.clipsEndTimeArrPAL.push(obj.End);  
+            } else {
+                this.clipsEndTimeArrNTSC.push(obj.End); 
+            }  
+          }  
+      }
+      
+   }
+  
 }

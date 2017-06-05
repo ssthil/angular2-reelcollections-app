@@ -7,16 +7,8 @@ import {AppModule} from './app.module';
 
 describe('ClipsService', () => {
 
-  const mockResponse = [{
-    id: 'jswebapps',
-    title: 'JS Web Apps',
-    description: 'JS Web Apps description here!'
-  },
-    {
-      id: 'android',
-      title: 'Android',
-      description: 'Android description here!'
-    }];
+  const mockResponse = []; 
+  let subject: ClipsService = null;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -45,14 +37,7 @@ describe('ClipsService', () => {
     expect(service).toBeDefined(); 
   })));
 
-  it('readAll should return observable with a []', async(inject(
-    [ClipsService], (service) => {
-      service.readAll().subscribe(courses => {
-        expect(courses[0].id).toBe('gwegw');
-        expect(courses[0].title).toBe('JS Web Apps');
-        expect(courses[0].description).toBe('JS Web Apps description here!');
+  
 
-      });
-    })));
 
 });
