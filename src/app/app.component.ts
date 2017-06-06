@@ -19,6 +19,9 @@ export class AppComponent {
   calculateTotalFFNTSC: any;
   calculateframeRatingPAL: any;
   calculateframeRatingNTSC: any;
+
+  addClips: any;
+  
   
   constructor(private _clipsService: ClipsService) {}
 
@@ -39,6 +42,8 @@ export class AppComponent {
 
     this.getStandardClipsTime("PAL", "SD");
     this.getStandardClipsTime("NTSC", "SD");
+
+    this.addClips =  this._clipsService.addClips();
   }
 
   reel: ReelTitle ={
@@ -119,14 +124,10 @@ export class AppComponent {
   }
 
   //add clip
-  addReel() {
-    this._clipsService.readAll()
-      .subscribe((data) => {
-        this.clips = data;
-        
-
-      })
-  }
+  addNewClip(): any {
+    //return this._clipsService.addClips();
+    console.log(this._clipsService.addClips())
+  } 
 
   //I navigate to the user interface and create a PAL SD Video Reel
   createStandardClips(clipStandard:string, clipDefinition:string) {

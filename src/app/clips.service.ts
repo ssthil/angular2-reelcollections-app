@@ -115,6 +115,39 @@ reelList = {
     return this.videoclips;   
   }
 
+  //add clips
+  //
+  addClips(): any { 
+
+    let newvalue = {
+      Standard:"NTSC",
+      Definition: "SD"
+    }
+
+    let newClipsToReel = {
+        "Name": "Test Name",
+        "Description": "Testing description",
+        "Standard": newvalue.Standard,
+        "Definition": newvalue.Definition,
+        "Start": "00: 00: 00: 00",
+        "End": "00: 00: 30: 00"
+    }
+
+    if(newvalue.Standard === "PAL") {
+      if(newvalue.Definition === "SD") {
+          this.reelList.selectedPALSDClips.push(newClipsToReel);
+      } else {
+          this.reelList.selectedPALHDClips.push(newClipsToReel);
+      }
+    } else {
+        if(newvalue.Definition === "SD") {
+          this.reelList.selectedNTSCSDClips.push(newClipsToReel);
+      } else {
+          this.reelList.selectedNTSCHDClips.push(newClipsToReel);
+      }
+    }
+  }
+
   //create reel
   createStandardClips():any {  
     for(let val in this.videoclips) { 
@@ -127,6 +160,8 @@ reelList = {
     }
     return this.reelList;
   }
+
+  
 
   // FF count PAL SD
    calculateframeRatingPAL(clipStandard:string, clipDefinition:string): any {   
