@@ -19,6 +19,9 @@ export class AppComponent {
   calculateTotalFFNTSC: any;
   calculateframeRatingPAL: any;
   calculateframeRatingNTSC: any;
+
+  //16-06-2017
+  totalTimeTest:any;
   
   constructor(private _clipsService: ClipsService) {}
 
@@ -31,14 +34,22 @@ export class AppComponent {
     this.calculateframeRatingPAL = this._clipsService.calculateframeRatingPAL("SD", "PAL");
     this.calculateframeRatingNTSC = this._clipsService.calculateframeRatingNTSC("SD", "NTSC");
 
-    console.log(this.calculateTotalFFPAL);
+    //16-06-2017
+    this.totalTimeTest = this._clipsService.calculateTimeTest();
+
+    //console.log(this.calculateTotalFFPAL);
     //console.log(this.calculateTotalFFNTSC);
     console.log(this.groupedViseoClips)
     console.log(this.calculateframeRatingPAL);
     console.log(this.calculateframeRatingNTSC); 
 
-    this.getStandardClipsTime("PAL", "SD");
-    this.getStandardClipsTime("NTSC", "SD");
+    //16-06-2017
+    //console.log(this.totalTimeTest); 
+
+    //this.getStandardClipsTime("PAL", "SD");
+    //this.getStandardClipsTime("NTSC", "SD");
+
+    this.getMinutes();
   }
 
   reel: ReelTitle ={
@@ -192,6 +203,7 @@ export class AppComponent {
      this._clipsService.readAll()
       .subscribe((data) => {
         this.clips = data;
+
         this.clipsEndTimeArr=[];
         this.hh = [];
         this.mm = [];
@@ -233,17 +245,34 @@ export class AppComponent {
        // console.log(this.mm);
         //console.log(this.totalMM);
         var minutes = ("00" + Math.floor(((this.totalMM*60) % 3600) / 60) * 60).slice(-2);
-       // console.log("Mins: "+minutes);
+        console.log("Mins: "+minutes);
        // console.log(this.ss);
        // console.log(this.totalSS);
         var seconds = ("00" + (this.totalSS % 3600) ).slice(-2);
-        
+        console.log(seconds)
         var totalMinutes = Number(hours)+Number(minutes)+Number(seconds);
        // console.log(this.ff);
         //console.log(this.totalFF);
         return (totalMinutes-(totalMinutes%=60))/60 + (9 < totalMinutes?':':':0')+ totalMinutes;
 
       });
+  }
+
+  getMinutes() {
+      var minutes1 = 70;
+      var minsQuotient = Math.floor( minutes1/ 60) < 10 ? "0"+Math.floor(minutes1 / 60) : Math.floor(minutes1 / 60);
+      var minsRemainder = (minutes1 % 60) < 10 ? "0"+ Math.floor(minutes1 % 60) : Math.floor(minutes1 % 60);
+          
+      var totalTime = "00:"+minsQuotient+":"+minsRemainder+":00";
+
+      var minutes2 = 53;
+      var minsQuotient1 = Math.floor(minutes2 / 60) < 10 ? "0"+Math.floor(minutes2 / 60) : Math.floor(minutes2 / 60);
+      var minsRemainder1= (minutes2 % 60) < 10 ? "0"+ Math.floor(minutes2 % 60) : Math.floor(minutes2 % 60);
+          
+      var totalTime1 = "00:"+minsQuotient1+":"+minsRemainder1+":00";
+        //return totalMinutes
+      //console.log(totalTime);
+      //console.log(totalTime1);
   }
 
   
