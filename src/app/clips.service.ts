@@ -127,7 +127,7 @@ reelList = {
   addClips(): any { 
 
     let newvalue = {
-      Standard:"NTSC",
+      Standard:"PAL",
       Definition: "SD"
     }
 
@@ -251,7 +251,7 @@ reelList = {
 
    // time test
    calculateTimeTest() {   
-      var obj, minutes1, minsQuotient, minsRemainder;
+      var obj, minsQuotient, minsRemainder;
       this.clipsEndTimeArray = [];
         this.hh = [];
         this.mm = [];
@@ -259,29 +259,10 @@ reelList = {
     
       for(let val in this.videoclips) {   
           obj = this.videoclips[val]; 
-      
-        /*if(obj.Definition === "SD") { 
-          if(obj.Standard === "PAL") { 
-
-            let ffQuotientForSeconds, ffRemainder, framesCount: number, ff=[]; 
-              for(let i=0; i<this.clipsEndTimeArrPAL.length; i++) {
-                this.clipsSplitEndTimeArrPAL = this.clipsEndTimeArrPAL[i].split(":");
-                ff.push(this.clipsSplitEndTimeArrPAL[3]);
-              }
-              this.totalFFarrayPAL = ff.reduce((a,b) => a+ parseFloat(b), 0);    
-       
-              framesCount = 25;
-              ffQuotientForSeconds = Math.floor(this.totalFFarrayPAL / framesCount) < 10 ? "0"+Math.floor(this.totalFFarrayPAL / framesCount) : Math.floor(this.totalFFarrayPAL / framesCount);
-              ffRemainder = (this.totalFFarrayPAL % framesCount) < 10 ? "0"+Math.floor(this.totalFFarrayPAL % framesCount) : Math.floor(this.totalFFarrayPAL % framesCount);
-            
-              this.totalFFPAL = "00:00:"+ffQuotientForSeconds+":"+ffRemainder;
-          }   
-        }*/
         
         if(obj.Standard === "PAL" && obj.Definition === "SD") {  
               this.clipsEndTimeArray.push(obj.End);
         }
-
          
       }
       //16-06-2017
@@ -298,20 +279,47 @@ reelList = {
           this.totalSS +=parseFloat(this.ss[i]);  
         }
       
-     
+        //var hours = Math.floor(this.totalHH / 3600)* 60 < 10 ? ("00" + Math.floor(this.totalHH / 3600) * 60).slice(-2) : Math.floor(this.totalHH / 3600)* 60;
+        //console.log("Hours: "+ hours);
+       // console.log(this.mm);
+        //console.log(this.totalMM);
+        //var minutes = ("00" + Math.floor(((this.totalMM*60) % 3600) / 60) * 60).slice(-2);
+        //console.log("Mins: "+minutes);
+       // console.log(this.ss);
+       // console.log(this.totalSS);
+        //var seconds = ("00" + (this.totalSS % 3600) ).slice(-2);
+        //console.log("Secs: "+ seconds)
+        //var totalMinutes = Number(hours)+Number(minutes)+Number(seconds);
+       // console.log(this.ff);
+        //console.log(this.totalFF);
+       // return (totalMinutes-(totalMinutes%=60))/60 + (9 < totalMinutes?':':':0')+ totalMinutes;
+
+       var minutesArray = this.mm;
+       var secondsArray = this.ss;
+
+        var totalMins = minutesArray.reduce(function(prev, curr){ 
+            return (Number(prev) || 0) + (Number(curr) || 0);  
+        });
+
+        var totalSecs = secondsArray.reduce(function(prev, curr){ 
+            return (Number(prev) || 0) + (Number(curr) || 0);  
+        });
       
 
-      minutes1 = 70;
+      var minutes1 = totalSecs;
       minsQuotient = Math.floor( minutes1/ 60) < 10 ? "0"+Math.floor(minutes1 / 60) : Math.floor(minutes1 / 60);
       minsRemainder = (minutes1 % 60) < 10 ? "0"+ Math.floor(minutes1 % 60) : Math.floor(minutes1 % 60);
           
       this.totalTimeTest = "00:"+minsQuotient+":"+minsRemainder+":00";
 
+      
+
       //console.log(this.clipsEndTimeArray);
       console.log(this.hh);
       console.log(this.mm);
       console.log(this.ss);
-      return this.totalTimeTest;
+      console.log(this.totalTimeTest)
+      
 
    }
   
