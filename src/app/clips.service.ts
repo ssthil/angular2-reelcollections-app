@@ -124,34 +124,71 @@ reelList = {
 
   //add clips
   //
-  addClips(): any { 
-
+  addClipsPALSD(standard, definition, name, description): any { 
     let newvalue = {
-      Standard:"PAL",
-      Definition: "SD"
+      Standard:standard,
+      Definition: definition,
+      Name: name || "Test Name",
+      Description: description || "Testing description",
+      Start: "00: 00: 00: 00",
+      End: "00: 00: 30: 00"
     }
 
-    let newClipsToReel = {
-        "Name": "Test Name",
-        "Description": "Testing description",
-        "Standard": newvalue.Standard,
-        "Definition": newvalue.Definition,
-        "Start": "00: 00: 00: 00",
-        "End": "00: 00: 30: 00"
-    }
-
-    if(newvalue.Standard === "PAL") {
-      if(newvalue.Definition === "SD") {
-          this.reelList.selectedPALSDClips.push(newClipsToReel);
-      } else {
-          this.reelList.selectedPALHDClips.push(newClipsToReel);
-      }
+    if(newvalue.Standard === "PAL" && newvalue.Definition === "SD") {
+        this.reelList.selectedPALSDClips.push(newvalue);   
     } else {
-        if(newvalue.Definition === "SD") {
-          this.reelList.selectedNTSCSDClips.push(newClipsToReel);
-      } else {
-          this.reelList.selectedNTSCHDClips.push(newClipsToReel);
-      }
+        alert("Cannot add HD or NTSC clip into this reel")
+    }
+  }
+
+  addClipsPALHD(standard, definition, name, description): any { 
+    let newvalue = {
+      Standard:standard,
+      Definition: definition,
+      Name: name || "Test Name",
+      Description: description || "Testing description",
+      Start: "00: 00: 00: 00",
+      End: "00: 00: 30: 00"
+    }
+
+    if(newvalue.Standard === "PAL" && newvalue.Definition === "HD") {
+        this.reelList.selectedPALHDClips.push(newvalue);   
+    } else {
+        alert("Cannot add SD or NTSC clip into this Reel")
+    }
+  }
+
+  addClipsNTSCSD(standard, definition, name, description): any { 
+    let newvalue = {
+      Standard:standard,
+      Definition: definition,
+      Name: name || "Test Name",
+      Description: description || "Testing description",
+      Start: "00: 00: 00: 00",
+      End: "00: 00: 30: 00"
+    }
+
+    if(newvalue.Standard === "NTSC" && newvalue.Definition === "SD") {
+        this.reelList.selectedNTSCSDClips.push(newvalue);
+    } else {
+        alert("Cannot add HD or PAL clip into this Reel")
+    }
+  }
+
+  addClipsNTSCHD(standard, definition, name, description): any { 
+    let newvalue = {
+      Standard:standard,
+      Definition: definition,
+      Name: name || "Test Name",
+      Description: description || "Testing description",
+      Start: "00: 00: 00: 00",
+      End: "00: 00: 30: 00"
+    }
+
+    if(newvalue.Standard === "NTSC" && newvalue.Definition === "HD") {
+        this.reelList.selectedNTSCHDClips.push(newvalue);
+    } else {
+        alert("Cannot add SD or PAL clip into this Reel")
     }
   }
 

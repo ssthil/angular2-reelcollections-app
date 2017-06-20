@@ -1,59 +1,291 @@
-<h1>
-    {{title}}
-</h1>
 <div class="container">
-
+    <h1>
+        {{title}}
+    </h1>
+    <hr/>
     <div class="panel-group">
         <div class="panel panel-default">
             <div class="panel-heading">
-                {{reel.title1}} <button (click)="myFunc()" class="btn btn-primary btn-sm pull-right">ADD</button>
+                <h3 class="panel-title">{{reel.title1}}</h3>
+                <div class="pull-right">
+                    <div class="title-standard-section">
+                        <p>Standard: <span class="label label-info">NTSC</span></p>
+                        <p>Definition: <span class="label label-warning">HD</span></p>
+                    </div>
+                    <div class="title-action-section">
+                        <button data-toggle="modal" data-target="#addClipNTSCHD" class="btn btn-primary btn-sm">Add new clips</button>
+                        <button type="button" class="btn btn-edit btn-sm">Edit Reel nmae</button>
+                    </div>
+                </div>
             </div>
             <div class="panel panel-body">
-                <ul>
-                    <li *ngFor="let reel of groupedViseoClips.selectedNTSCHDClips">
-                        {{reel.Name}} - {{reel.Definition}} - {{reel.Standard}}
-                    </li>
-                </ul>
+                <div class="list-group">
+                    <a *ngFor="let reel of groupedViseoClips.selectedNTSCHDClips" class="list-group-item">
+                        <div>
+                            <h4>{{reel.Name}}
+                                <button type="button" class="btn btn-remove btn-sm pull-right">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </h4>
+                            <p>{{reel.Description}}</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                {{reel.title2}}
+                <h3 class="panel-title">{{reel.title2}}</h3>
+                <div class="pull-right">
+                    <div class="title-standard-section">
+                        <p>Standard: <span class="label label-info">NTSC</span></p>
+                        <p>Definition: <span class="label label-warning">SD</span></p>
+                    </div>
+                    <div class="title-action-section">
+                        <button data-toggle="modal" data-target="#addClipNTSCSD" class="btn btn-primary btn-sm">Add new clips</button>
+                        <button type="button" class="btn btn-edit btn-sm">Edit Reel nmae</button>
+                    </div>
+                </div>
             </div>
             <div class="panel panel-body">
-                <ul>
-                    <li *ngFor="let reel of groupedViseoClips.selectedNTSCSDClips">
-                        {{reel.Name}} - {{reel.Definition}} - {{reel.Standard}}
-                    </li>
-                </ul>
+                <div class="list-group">
+                    <a *ngFor="let reel of groupedViseoClips.selectedNTSCSDClips" class="list-group-item">
+                        <div>
+                            <h4>{{reel.Name}}
+                                <button type="button" class="btn btn-remove btn-sm pull-right">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </h4>
+                            <p>{{reel.Description}}</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                {{reel.title3}}
+                <h3 class="panel-title">{{reel.title3}}</h3>
+                <div class="pull-right">
+                    <div class="title-standard-section">
+                        <p>Standard: <span class="label label-info">PAL</span></p>
+                        <p>Definition: <span class="label label-warning">SD</span></p>
+                    </div>
+                    <div class="title-action-section">
+                        <button data-toggle="modal" data-target="#addClipPALSD" class="btn btn-primary btn-sm">Add new clips</button>
+                        <button type="button" class="btn btn-edit btn-sm">Edit Reel nmae</button>
+                    </div>
+                </div>
             </div>
             <div class="panel panel-body">
-                <ul>
-                    <li *ngFor="let reel of groupedViseoClips.selectedPALSDClips">
-                        {{reel.Name}} - {{reel.Definition}} - {{reel.Standard}}
-                    </li>
-                </ul>
+                <div class="list-group">
+                    <a *ngFor="let reel of groupedViseoClips.selectedPALSDClips" class="list-group-item">
+                        <div>
+                            <h4>{{reel.Name}}
+                                <button type="button" class="btn btn-remove btn-sm pull-right">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </h4>
+                            <p>{{reel.Description}}</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
+
         <div class="panel panel-default">
             <div class="panel-heading">
-                {{reel.title4}}
+                <h3 class="panel-title">{{reel.title4}}</h3>
+                <div class="pull-right">
+                    <div class="title-standard-section">
+                        <p>Standard: <span class="label label-info">PAL</span></p>
+                        <p>Definition: <span class="label label-warning">HD</span></p>
+                    </div>
+                    <div class="title-action-section">
+                        <button data-toggle="modal" data-target="#addClipPALHD" class="btn btn-primary btn-sm">Add new clips</button>
+                        <button type="button" class="btn btn-edit btn-sm">Edit Reel nmae</button>
+                    </div>
+                </div>
             </div>
             <div class="panel panel-body">
-                <ul>
-                    <li *ngFor="let reel of groupedViseoClips.selectedPALHDClips">
-                        {{reel.Name}} - {{reel.Definition}} - {{reel.Standard}}
-                    </li>
-                </ul>
+                <div class="list-group">
+                    <a *ngFor="let reel of groupedViseoClips.selectedPALHDClips" class="list-group-item">
+                        <div>
+                            <h4>{{reel.Name}}
+                                <button type="button" class="btn btn-remove btn-sm pull-right">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </h4>
+                            <p>{{reel.Description}}</p>
+                        </div>
+                    </a>
+                </div>
             </div>
-
         </div>
     </div>
+    <!-- Modal window NTSC HD-->
+    <div id="addClipNTSCHD" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add new video clips to this reel</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form>
+                        <div class="form-group">
+                            <label for="video_clip_name">Video Clip Name:</label>
+                            <input type="text" name="video_clip_name" class="form-control" id="video_clip_name" [(ngModel)]="newvalue.Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="desc">Description:</label>
+                            <input type="text" name="desc" [(ngModel)]="newvalue.Description" class="form-control" id="desc">
+                        </div>
+                        <div class="form-group">
+                            <label for="standard">Video Clip Standard:</label>
+                            <select class="form-control" id="standard" [(ngModel)]="newvalue.Standard" name="standard">
+                                        <option *ngFor="let standard of standards" [value]="standard">{{standard}}</option>
+                                    </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="definition">Video Clip Definition:</label>
+                            <select class="form-control" id="definition" [(ngModel)]="newvalue.Definition" name="definition">
+                                        <option *ngFor="let definition of definitions" [value]="definition">{{definition}}</option>
+                                    </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button (click)="addClipsNTSCHD()" class="btn btn-primary">Add new clip</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal window closed -->
+    <!-- Modal window NTSC SD-->
+    <div id="addClipNTSCSD" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add new video clips to this reel</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form>
+                        <div class="form-group">
+                            <label for="video_clip_name">Video Clip Name:</label>
+                            <input type="text" name="video_clip_name" class="form-control" id="video_clip_name" [(ngModel)]="newvalue.Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="desc">Description:</label>
+                            <input type="text" name="desc" [(ngModel)]="newvalue.Description" class="form-control" id="desc">
+                        </div>
+                        <div class="form-group">
+                            <label for="standard">Video Clip Standard:</label>
+                            <select class="form-control" id="standard" [(ngModel)]="newvalue.Standard" name="standard">
+                                        <option *ngFor="let standard of standards" [value]="standard">{{standard}}</option>
+                                    </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="definition">Video Clip Definition:</label>
+                            <select class="form-control" id="definition" [(ngModel)]="newvalue.Definition" name="definition">
+                                        <option *ngFor="let definition of definitions" [value]="definition">{{definition}}</option>
+                                    </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button (click)="addClipsNTSCSD()" class="btn btn-primary">Add new clip</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal window closed -->
+    <!-- Modal window PAL SD-->
+    <div id="addClipPALSD" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add new video clips to this reel</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form>
+                        <div class="form-group">
+                            <label for="video_clip_name">Video Clip Name:</label>
+                            <input type="text" name="video_clip_name" class="form-control" id="video_clip_name" [(ngModel)]="newvalue.Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="desc">Description:</label>
+                            <input type="text" name="desc" [(ngModel)]="newvalue.Description" class="form-control" id="desc">
+                        </div>
+                        <div class="form-group">
+                            <label for="standard">Video Clip Standard:</label>
+                            <select class="form-control" id="standard" [(ngModel)]="newvalue.Standard" name="standard">
+                                        <option *ngFor="let standard of standards" [value]="standard">{{standard}}</option>
+                                    </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="definition">Video Clip Definition:</label>
+                            <select class="form-control" id="definition" [(ngModel)]="newvalue.Definition" name="definition">
+                                        <option *ngFor="let definition of definitions" [value]="definition">{{definition}}</option>
+                                    </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button (click)="addClipsPALSD()" class="btn btn-primary">Add new clip</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal window closed -->
+    <!-- Modal window PAL HD-->
+    <div id="addClipPALHD" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add new video clips to this reel</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form>
+                        <div class="form-group">
+                            <label for="video_clip_name">Video Clip Name:</label>
+                            <input type="text" name="video_clip_name" class="form-control" id="video_clip_name" [(ngModel)]="newvalue.Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="desc">Description:</label>
+                            <input type="text" name="desc" [(ngModel)]="newvalue.Description" class="form-control" id="desc">
+                        </div>
+                        <div class="form-group">
+                            <label for="standard">Video Clip Standard:</label>
+                            <select class="form-control" id="standard" [(ngModel)]="newvalue.Standard" name="standard">
+                                        <option *ngFor="let standard of standards" [value]="standard">{{standard}}</option>
+                                    </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="definition">Video Clip Definition:</label>
+                            <select class="form-control" id="definition" [(ngModel)]="newvalue.Definition" name="definition">
+                                        <option *ngFor="let definition of definitions" [value]="definition">{{definition}}</option>
+                                    </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button (click)="addClipsPALHD()" class="btn btn-primary">Add new clip</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal window closed -->
 </div>

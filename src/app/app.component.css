@@ -1,0 +1,52 @@
+.panel-heading {
+    height: 42px;
+}
+
+.panel-heading div {
+    margin-top: -18px;
+    font-size: 15px;
+}
+
+.btn-sm,
+.btn-group-sm>.btn {
+    padding: 2px 8px;
+    font-size: 10px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.title-standard-section {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.title-action-section {
+    display: inline-block;
+}
+
+.title-standard-section p {
+    display: inline;
+    font-size: 12px;
+}
+
+.btn-remove {
+    color: #ccc;
+    background-color: rgba(255, 255, 255, .15);
+    border-color: #eee;
+    padding: 2px 5px;
+    font-size: 9px;
+}
+
+.btn-remove:hover {
+    color: #fff;
+    background-color: #e25550;
+    border-color: #f15651;
+    padding: 2px 6px;
+    font-size: 9px;
+}
+
+.btn-edit {
+    color: #eee;
+    background-color: #545696;
+    border-color: #3f4d8c;
+}

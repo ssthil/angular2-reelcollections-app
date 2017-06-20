@@ -58,21 +58,32 @@ export class AppComponent {
     this.getStandardClipsTime("PAL", "SD");
     this.getStandardClipsTime("NTSC", "SD");
 
-    this.addClips =  this._clipsService.addClips();
+    //this.addClips =  this._clipsService.addClips();
 
   }
 
   reel: ReelTitle ={
-    title1:'Selected clips for NTSC HD',
-    title2:'Selected clips for NTSC SD',
-    title3:'Selected clips for PAL SD',
-    title4:'Selected clips for PAL HD'
+    title1:'Reel Name 1',
+    title2:'Reel Name 2',
+    title3:'Reel Name 3',
+    title4:'Reel Name 4'
   }
   
 
   
   // end
-  title = '';
+  title = 'Reel list from collection of video clips';
+  standards = ["NTSC", "PAL"];
+  definitions = ["HD", "SD"];
+
+  newvalue = {
+      Standard:"",
+      Definition: "",
+      Name: "",
+      Description: ""
+  }
+
+  //get diagnostic() { return JSON.stringify(this.newvalue); }
 
   clips = {};
 
@@ -103,26 +114,20 @@ export class AppComponent {
   //time
   hh:any[]; mm:any[]; ss:any[]; ff:any[]; totalHH:number; totalMM:number; totalSS:number; totalFF:string;
   
-  myFunc(){
-    //console.log("function called");
-    // let newValue = {
-    //   Standard:"PAL",
-    //   Definition:"SD"
-    // }
+  addClipsPALSD () {
+    this._clipsService.addClipsPALSD(this.newvalue.Standard, this.newvalue.Definition, this.newvalue.Name, this.newvalue.Description);
+  }
 
-    // let newClipsToReel = {
-    //     "Name": "Test Name",
-    //     "Description": "Testing description",
-    //     "Standard": newValue.Standard,
-    //     "Definition": newValue.Definition,
-    //     "Start": "00: 00: 00: 00",
-    //     "End": "00: 00: 30: 00"
-    // }
+  addClipsPALHD () {
+    this._clipsService.addClipsPALHD(this.newvalue.Standard, this.newvalue.Definition, this.newvalue.Name, this.newvalue.Description);
+  }
 
-    // if(newValue.Standard === "PAL" && newValue.Definition === "SD") {
-    //   this.clipsPALDefinitionSD.push(newClipsToReel);
-    // }
-    this._clipsService.addClips()
+  addClipsNTSCSD () {
+    this._clipsService.addClipsNTSCSD(this.newvalue.Standard, this.newvalue.Definition, this.newvalue.Name, this.newvalue.Description);
+  }
+
+  addClipsNTSCHD () {
+    this._clipsService.addClipsNTSCHD(this.newvalue.Standard, this.newvalue.Definition, this.newvalue.Name, this.newvalue.Description);
   }
 
   //find video clips Definition 
@@ -137,8 +142,6 @@ export class AppComponent {
             this.clipsDefinition.push(obj.Definition);
         }
         console.log(this.clipsDefinition);
-        //length
-        //console.log(this.clipsDefinition.length);
       })
   }
 
@@ -154,16 +157,9 @@ export class AppComponent {
           this.clipsStandard.push(obj.Standard);
         }
         console.log(this.clipsStandard);
-        //length
-       // console.log(this.clipsStandard.length);
       })
   }
 
-  //add clip
-  addNewClip(): any {
-    //return this._clipsService.addClips();
-    console.log(this._clipsService.addClips())
-  } 
 
   //I navigate to the user interface and create a PAL SD Video Reel
   createStandardClips(clipStandard:string, clipDefinition:string) {
