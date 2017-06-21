@@ -2,8 +2,14 @@
     height: 42px;
 }
 
+.reel-name-section,
+.reel-name-section h3,
+.reel-name-section input {
+    display: inline-block;
+}
+
 .panel-heading div {
-    margin-top: -18px;
+    margin-top: 0;
     font-size: 15px;
 }
 

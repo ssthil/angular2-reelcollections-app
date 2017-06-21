@@ -83,6 +83,30 @@ export class AppComponent {
       Description: ""
   }
 
+  reelNameLabel:boolean = true;
+  editReelNameLabel:boolean = false;
+
+  reelNameEditBtn: boolean = true;
+  reelNameSaveBtn: boolean = false;
+
+  newReelName:string = this.reel.title1;
+
+  editReelNameTitle(){
+    this.reelNameLabel = false;
+    this.editReelNameLabel = true;
+    this.reelNameEditBtn = false;
+    this.reelNameSaveBtn = true;
+    this.newReelName = this.reel.title1;
+  }
+
+  saveReelNameTitle(){
+    this.reelNameLabel = true;
+    this.editReelNameLabel = false;
+    this.reelNameEditBtn = true;
+    this.reelNameSaveBtn = false;
+    this.newReelName = this.newReelName;
+  }
+
   //get diagnostic() { return JSON.stringify(this.newvalue); }
 
   clips = {};
