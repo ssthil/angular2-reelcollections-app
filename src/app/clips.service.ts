@@ -135,7 +135,7 @@ reelList = {
     }
 
     if(newvalue.Standard === "PAL" && newvalue.Definition === "SD") {
-        this.reelList.selectedPALSDClips.push(newvalue);   
+        this.reelList.selectedPALSDClips.push(newvalue); 
     } else {
         alert("Cannot add HD or NTSC clip into this reel")
     }

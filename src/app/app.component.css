@@ -6,6 +6,7 @@
 .reel-name-section h3,
 .reel-name-section input {
     display: inline-block;
+    padding: 0 0 0 6px;
 }
 
 .panel-heading div {

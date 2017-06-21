@@ -1,14 +1,14 @@
 <div class="container">
-    <h1>
+    <h3>
         {{title}}
-    </h1>
+    </h3>
     <hr/>
     <div class="panel-group">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="reel-name-section">
-                    <h3 class="panel-title" *ngIf="reelNameLabel">{{newReelName}}</h3>
-                    <input type="text" name="" [(ngModel)]="newReelName" *ngIf="editReelNameLabel" />
+                    <h3 class="panel-title" *ngIf="reelNameLabel1">{{newReelName1}}</h3>
+                    <input type="text" name="" [(ngModel)]="newReelName1" *ngIf="editReelNameLabel1" (keyup.enter)="saveReelNameTitle('reel1')" />
                 </div>
                 <div class="pull-right">
                     <div class="title-standard-section">
@@ -17,19 +17,19 @@
                     </div>
                     <div class="title-action-section">
                         <button data-toggle="modal" data-target="#addClipNTSCHD" class="btn btn-primary btn-sm">Add new clips</button>
-                        <button type="button" *ngIf="reelNameEditBtn" (click)="editReelNameTitle()" class="btn btn-edit btn-sm">Edit Reel Name</button>
-                        <button type="button" *ngIf="reelNameSaveBtn" (click)="saveReelNameTitle()" class="btn btn-edit btn-sm">Save Reel Name</button>
+                        <button type="button" *ngIf="reelNameEditBtn1" (click)="editReelNameTitle('reel1')" class="btn btn-edit btn-sm">Edit Reel Name</button>
+                        <button type="button" *ngIf="reelNameSaveBtn1" (click)="saveReelNameTitle('reel1')" class="btn btn-edit btn-sm">Save Reel Name</button>
                     </div>
                 </div>
             </div>
             <div class="panel panel-body">
                 <div class="list-group">
-                    <a *ngFor="let reel of groupedViseoClips.selectedNTSCHDClips" class="list-group-item">
+                    <a *ngFor="let reel of groupedVideoClips.selectedNTSCHDClips" class="list-group-item">
                         <div>
                             <h4>{{reel.Name}}
-                                <button type="button" class="btn btn-remove btn-sm pull-right">
+                                <!--<button type="button" class="btn btn-remove btn-sm pull-right" (click)="deleteSelectedNTSCHDClip(i)">
                                     <span class="glyphicon glyphicon-remove"></span>
-                                </button>
+                                </button>-->
                             </h4>
                             <p>{{reel.Description}}</p>
                         </div>
@@ -41,7 +41,8 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="reel-name-section">
-                    <h3 class="panel-title">{{reel.title2}}</h3>
+                    <h3 class="panel-title" *ngIf="reelNameLabel2">{{newReelName2}}</h3>
+                    <input type="text" name="" [(ngModel)]="newReelName2" *ngIf="editReelNameLabel2" (keyup.enter)="saveReelNameTitle('reel2')" />
                 </div>
                 <div class="pull-right">
                     <div class="title-standard-section">
@@ -50,18 +51,19 @@
                     </div>
                     <div class="title-action-section">
                         <button data-toggle="modal" data-target="#addClipNTSCSD" class="btn btn-primary btn-sm">Add new clips</button>
-                        <button type="button" class="btn btn-edit btn-sm">Edit Reel Name</button>
+                        <button type="button" *ngIf="reelNameEditBtn2" (click)="editReelNameTitle('reel2')" class="btn btn-edit btn-sm">Edit Reel Name</button>
+                        <button type="button" *ngIf="reelNameSaveBtn2" (click)="saveReelNameTitle('reel2')" class="btn btn-edit btn-sm">Save Reel Name</button>
                     </div>
                 </div>
             </div>
             <div class="panel panel-body">
                 <div class="list-group">
-                    <a *ngFor="let reel of groupedViseoClips.selectedNTSCSDClips" class="list-group-item">
+                    <a *ngFor="let reel of groupedVideoClips.selectedNTSCSDClips" class="list-group-item">
                         <div>
                             <h4>{{reel.Name}}
-                                <button type="button" class="btn btn-remove btn-sm pull-right">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
+                                <!--<button id="" type="button" class="btn btn-remove btn-sm pull-right" (click)="deleteSelectedNTSCSDClip()">
+                                    <span class="glyphicon glyphicon-remove"></span>  
+                                </button>-->
                             </h4>
                             <p>{{reel.Description}}</p>
                         </div>
@@ -73,7 +75,8 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="reel-name-section">
-                    <h3 class="panel-title">{{reel.title3}}</h3>
+                    <h3 class="panel-title" *ngIf="reelNameLabel3">{{newReelName3}}</h3>
+                    <input type="text" name="" [(ngModel)]="newReelName3" *ngIf="editReelNameLabel3" (keyup.enter)="saveReelNameTitle('reel3')" />
                 </div>
                 <div class="pull-right">
                     <div class="title-standard-section">
@@ -82,18 +85,19 @@
                     </div>
                     <div class="title-action-section">
                         <button data-toggle="modal" data-target="#addClipPALSD" class="btn btn-primary btn-sm">Add new clips</button>
-                        <button type="button" class="btn btn-edit btn-sm">Edit Reel Name</button>
+                        <button type="button" *ngIf="reelNameEditBtn3" (click)="editReelNameTitle('reel3')" class="btn btn-edit btn-sm">Edit Reel Name</button>
+                        <button type="button" *ngIf="reelNameSaveBtn3" (click)="saveReelNameTitle('reel3')" class="btn btn-edit btn-sm">Save Reel Name</button>
                     </div>
                 </div>
             </div>
             <div class="panel panel-body">
                 <div class="list-group">
-                    <a *ngFor="let reel of groupedViseoClips.selectedPALSDClips" class="list-group-item">
+                    <a *ngFor="let reel of groupedVideoClips.selectedPALSDClips" class="list-group-item">
                         <div>
                             <h4>{{reel.Name}}
-                                <button type="button" class="btn btn-remove btn-sm pull-right">
+                                <!--<button type="button" class="btn btn-remove btn-sm pull-right" (click)="deleteSelectedPALSDClip(i)">
                                     <span class="glyphicon glyphicon-remove"></span>
-                                </button>
+                                </button>-->
                             </h4>
                             <p>{{reel.Description}}</p>
                         </div>
@@ -105,7 +109,8 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="reel-name-section">
-                    <h3 class="panel-title">{{reel.title4}}</h3>
+                    <h3 class="panel-title" *ngIf="reelNameLabel4">{{newReelName4}}</h3>
+                    <input type="text" name="" [(ngModel)]="newReelName4" *ngIf="editReelNameLabel4" (keyup.enter)="saveReelNameTitle('reel4')" />
                 </div>
                 <div class="pull-right">
                     <div class="title-standard-section">
@@ -114,18 +119,19 @@
                     </div>
                     <div class="title-action-section">
                         <button data-toggle="modal" data-target="#addClipPALHD" class="btn btn-primary btn-sm">Add new clips</button>
-                        <button type="button" class="btn btn-edit btn-sm">Edit Reel Name</button>
+                        <button type="button" *ngIf="reelNameEditBtn4" (click)="editReelNameTitle('reel4')" class="btn btn-edit btn-sm">Edit Reel Name</button>
+                        <button type="button" *ngIf="reelNameSaveBtn4" (click)="saveReelNameTitle('reel4')" class="btn btn-edit btn-sm">Save Reel Name</button>
                     </div>
                 </div>
             </div>
             <div class="panel panel-body">
                 <div class="list-group">
-                    <a *ngFor="let reel of groupedViseoClips.selectedPALHDClips" class="list-group-item">
+                    <a *ngFor="let reel of groupedVideoClips.selectedPALHDClips" class="list-group-item">
                         <div>
                             <h4>{{reel.Name}}
-                                <button type="button" class="btn btn-remove btn-sm pull-right">
+                                <!--<button type="button" class="btn btn-remove btn-sm pull-right" (click)="deleteSelectedPALHDClip(i)">
                                     <span class="glyphicon glyphicon-remove"></span>
-                                </button>
+                                </button>-->
                             </h4>
                             <p>{{reel.Description}}</p>
                         </div>

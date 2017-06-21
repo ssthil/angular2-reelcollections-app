@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ClipsService } from './clips.service';
 import { ReelTitle } from './reelTitle';
 
@@ -11,9 +11,11 @@ import { ReelTitle } from './reelTitle';
 
 export class AppComponent {
 
+  @Input()
+  
   // 02-06-2017
   allClips: any;
-  groupedViseoClips: any;
+  groupedVideoClips: any;
 
   calculateTotalFFPAL: any;
   calculateTotalFFNTSC: any;
@@ -30,7 +32,7 @@ export class AppComponent {
 
   ngOnInit() { 
     this.allClips = this._clipsService.getAllClips();
-    this.groupedViseoClips =  this._clipsService.createStandardClips();
+    this.groupedVideoClips =  this._clipsService.createStandardClips();
     this.calculateTotalFFPAL = this._clipsService.calculateTotalFFPAL();
     //this.calculateTotalFFNTSC = this._clipsService.calculateTotalFFNTSC();
 
@@ -40,18 +42,14 @@ export class AppComponent {
     //16-06-2017
     this.totalTimeTest = this._clipsService.calculateTimeTest();
 
-    //console.log(this.calculateTotalFFPAL);
-    //console.log(this.calculateTotalFFNTSC);
-    console.log(this.groupedViseoClips)
+    console.log(this.groupedVideoClips)
     console.log(this.calculateframeRatingPAL);
     console.log(this.calculateframeRatingNTSC); 
+    //console.log(Object.keys(this.groupedVideoClips).length)
 
 
     //16-06-2017
-    //console.log(this.totalTimeTest); 
-
-    //this.getStandardClipsTime("PAL", "SD");
-    //this.getStandardClipsTime("NTSC", "SD");
+   
 
     this.getMinutes();
 
@@ -72,7 +70,7 @@ export class AppComponent {
 
   
   // end
-  title = 'Reel list from collection of video clips';
+  title = 'Reel List from Collection of Video Clips';
   standards = ["NTSC", "PAL"];
   definitions = ["HD", "SD"];
 
@@ -83,29 +81,104 @@ export class AppComponent {
       Description: ""
   }
 
-  reelNameLabel:boolean = true;
-  editReelNameLabel:boolean = false;
+  reelNameLabel1:boolean = true;
+  editReelNameLabel1:boolean = false;
+  reelNameEditBtn1: boolean = true;
+  reelNameSaveBtn1: boolean = false;
 
-  reelNameEditBtn: boolean = true;
-  reelNameSaveBtn: boolean = false;
+  reelNameLabel2:boolean = true;
+  editReelNameLabel2:boolean = false;
+  reelNameEditBtn2: boolean = true;
+  reelNameSaveBtn2: boolean = false;
 
-  newReelName:string = this.reel.title1;
+  reelNameLabel3:boolean = true;
+  editReelNameLabel3:boolean = false;
+  reelNameEditBtn3: boolean = true;
+  reelNameSaveBtn3: boolean = false;
 
-  editReelNameTitle(){
-    this.reelNameLabel = false;
-    this.editReelNameLabel = true;
-    this.reelNameEditBtn = false;
-    this.reelNameSaveBtn = true;
-    this.newReelName = this.reel.title1;
+  reelNameLabel4:boolean = true;
+  editReelNameLabel4:boolean = false;
+  reelNameEditBtn4: boolean = true;
+  reelNameSaveBtn4: boolean = false;
+
+  newReelName1:string = this.reel.title1;
+  newReelName2:string = this.reel.title2;
+  newReelName3:string = this.reel.title3;
+  newReelName4:string = this.reel.title4;
+
+  editReelNameTitle(reel){
+    if(reel === "reel1") {
+      this.reelNameLabel1 = false;
+      this.editReelNameLabel1 = true;
+      this.reelNameEditBtn1 = false;
+      this.reelNameSaveBtn1 = true;
+      this.newReelName1 = this.reel.title1;
+    } else if (reel === "reel2") {
+      this.reelNameLabel2 = false;
+      this.editReelNameLabel2 = true;
+      this.reelNameEditBtn2 = false;
+      this.reelNameSaveBtn2 = true;
+      this.newReelName2 = this.reel.title2;
+    } else if (reel === "reel3") {
+      this.reelNameLabel3 = false;
+      this.editReelNameLabel3 = true;
+      this.reelNameEditBtn3 = false;
+      this.reelNameSaveBtn3 = true;
+      this.newReelName3 = this.reel.title3;
+    } else  {
+      this.reelNameLabel4 = false;
+      this.editReelNameLabel4 = true;
+      this.reelNameEditBtn4 = false;
+      this.reelNameSaveBtn4 = true;
+      this.newReelName4 = this.reel.title4;
+    }
+    
   }
 
-  saveReelNameTitle(){
-    this.reelNameLabel = true;
-    this.editReelNameLabel = false;
-    this.reelNameEditBtn = true;
-    this.reelNameSaveBtn = false;
-    this.newReelName = this.newReelName;
+
+  saveReelNameTitle(reel){
+    if(reel === "reel1") {
+      this.reelNameLabel1 = true;
+      this.editReelNameLabel1 = false;
+      this.reelNameEditBtn1 = true;
+      this.reelNameSaveBtn1 = false;
+      this.newReelName1 = this.newReelName1;
+    } else if (reel === "reel2") {
+      this.reelNameLabel2 = true;
+      this.editReelNameLabel2 = false;
+      this.reelNameEditBtn2 = true;
+    this.reelNameSaveBtn2 = false;
+      this.newReelName2 = this.newReelName2;
+    } else if (reel === "reel3") {
+      this.reelNameLabel3 = true;
+      this.editReelNameLabel3 = false;
+      this.reelNameEditBtn3 = true;
+      this.reelNameSaveBtn3 = false;
+      this.newReelName3 = this.newReelName3;
+    } else  {
+      this.reelNameLabel4 = true;
+      this.editReelNameLabel4 = false;
+      this.reelNameEditBtn4 = true;
+      this.reelNameSaveBtn4 = false;
+      this.newReelName4 = this.newReelName4;
+    }
   }
+
+  /*deleteSelectedNTSCHDClip(index) {
+      this.groupedVideoClips.selectedNTSCHDClips.splice(this.groupedVideoClips.selectedNTSCHDClips.indexOf(index), 1);
+  }
+  deleteSelectedNTSCSDClip() {
+      this.groupedVideoClips.selectedNTSCSDClips.splice(index, 1);
+      var index = this.groupedVideoClips.selectedNTSCSDClips.indexOf(this.groupedVideoClips);
+      this.groupedVideoClips.selectedNTSCSDClips.splice(index, 1);
+  }
+  deleteSelectedPALSDClip(index) {
+      this.groupedVideoClips.selectedPALSDClips.splice(index, 1);
+  }
+  deleteSelectedPALHDClip(index) {
+      this.groupedVideoClips.selectedPALHDClips.splice(index, 1);
+  }*/
+  
 
   //get diagnostic() { return JSON.stringify(this.newvalue); }
 
@@ -140,6 +213,7 @@ export class AppComponent {
   
   addClipsPALSD () {
     this._clipsService.addClipsPALSD(this.newvalue.Standard, this.newvalue.Definition, this.newvalue.Name, this.newvalue.Description);
+    
   }
 
   addClipsPALHD () {
