@@ -45,18 +45,7 @@ export class AppComponent {
     console.log(this.groupedVideoClips)
     console.log(this.calculateframeRatingPAL);
     console.log(this.calculateframeRatingNTSC); 
-    //console.log(Object.keys(this.groupedVideoClips).length)
-
-
-    //16-06-2017
-   
-
-    this.getMinutes();
-
-    this.getStandardClipsTime("PAL", "SD");
-    this.getStandardClipsTime("NTSC", "SD");
-
-    //this.addClips =  this._clipsService.addClips();
+    //console.log(Object.keys(this.groupedVideoClips).length);
 
   }
 
@@ -316,71 +305,7 @@ export class AppComponent {
       });
   
   }
-  //total duration displayed is 00:02:11:01 when I add all the PAL SD video clips
-  //total duration displayed is 00:00:54:08 when I add all the NTSC SD video clips
-  getStandardClipsTime(clipStandard:string, clipDefinition:string) { 
-    
-     this._clipsService.readAll()
-      .subscribe((data) => {
-        this.clips = data;
-
-        this.clipsEndTimeArr=[];
-        this.hh = [];
-        this.mm = [];
-        this.ss =[];
-        this.ff =[];
-
-        this.totalHH = 0;
-        this.totalMM = 0;
-        this.totalSS = 0;
-        
-
-        for (let val in this.clips) { 
-            let obj = this.clips[val];
-            
-           if(obj.Standard === clipStandard && obj.Definition === clipDefinition) {  
-              this.clipsEndTimeArr.push(obj.End);
-           } 
-           
-        }
-        for(let i=0; i<this.clipsEndTimeArr.length; i++) {
-          let clipsSplitEndTimeArr = this.clipsEndTimeArr[i].split(":");
-          this.hh.push(clipsSplitEndTimeArr[0]);
-          this.mm.push(clipsSplitEndTimeArr[1]);
-          this.ss.push(clipsSplitEndTimeArr[2]);
-          
-        }
-        for(let i=0; i<this.ss.length; i++) { 
-          this.totalHH +=parseFloat(this.hh[i]);
-          this.totalMM +=parseFloat(this.mm[i]);
-          this.totalSS +=parseFloat(this.ss[i]); 
-          
-        }
-        //console.log(this.clipsEndTimeArr); 
-        //console.log(this.hh);
-        //console.log(this.totalHH);
-        //this.totalHH = 1;
-        
-
-      });
-  }
-
-  getMinutes() {
-      var minutes1 = 70;
-      var minsQuotient = Math.floor( minutes1/ 60) < 10 ? "0"+Math.floor(minutes1 / 60) : Math.floor(minutes1 / 60);
-      var minsRemainder = (minutes1 % 60) < 10 ? "0"+ Math.floor(minutes1 % 60) : Math.floor(minutes1 % 60);
-          
-      var totalTime = "00:"+minsQuotient+":"+minsRemainder+":00";
-
-      var minutes2 = 53;
-      var minsQuotient1 = Math.floor(minutes2 / 60) < 10 ? "0"+Math.floor(minutes2 / 60) : Math.floor(minutes2 / 60);
-      var minsRemainder1= (minutes2 % 60) < 10 ? "0"+ Math.floor(minutes2 % 60) : Math.floor(minutes2 % 60);
-          
-      var totalTime1 = "00:"+minsQuotient1+":"+minsRemainder1+":00";
-        //return totalMinutes
-      //console.log(totalTime);
-      //console.log(totalTime1);
-  }
+  
 
   
 }
