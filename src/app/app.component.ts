@@ -153,23 +153,6 @@ export class AppComponent {
     }
   }
 
-  /*deleteSelectedNTSCHDClip(index) {
-      this.groupedVideoClips.selectedNTSCHDClips.splice(this.groupedVideoClips.selectedNTSCHDClips.indexOf(index), 1);
-  }
-  deleteSelectedNTSCSDClip() {
-      this.groupedVideoClips.selectedNTSCSDClips.splice(index, 1);
-      var index = this.groupedVideoClips.selectedNTSCSDClips.indexOf(this.groupedVideoClips);
-      this.groupedVideoClips.selectedNTSCSDClips.splice(index, 1);
-  }
-  deleteSelectedPALSDClip(index) {
-      this.groupedVideoClips.selectedPALSDClips.splice(index, 1);
-  }
-  deleteSelectedPALHDClip(index) {
-      this.groupedVideoClips.selectedPALHDClips.splice(index, 1);
-  }*/
-  
-
-  //get diagnostic() { return JSON.stringify(this.newvalue); }
 
   clips = {};
 
@@ -218,7 +201,7 @@ export class AppComponent {
   }
 
   //find video clips Definition 
-  getClipsDefinition(){ 
+  /*getClipsDefinition(){ 
     this._clipsService.readAll()
       .subscribe((data) => {
         this.clips = data;
@@ -230,22 +213,7 @@ export class AppComponent {
         }
         console.log(this.clipsDefinition);
       })
-  }
-
-  //find video clips Standard 
-  getClipsStandard(){
-    this._clipsService.readAll()
-      .subscribe((data) => {
-        this.clips = data;
-        this.clipsStandard = [];
-
-        for(var val in this.clips) {
-          var obj = this.clips[val];
-          this.clipsStandard.push(obj.Standard);
-        }
-        console.log(this.clipsStandard);
-      })
-  }
+  }*/
 
 
   //I navigate to the user interface and create a PAL SD Video Reel
@@ -281,31 +249,6 @@ export class AppComponent {
         
       })
   }
-
-  //frames count
-  framesRatingCount(definition, framesCount) {
-      
-      var quotient, remainder;
-      this._clipsService.readAll()
-      .subscribe((data) => {
-        this.clips = data;
-        this.totalFF;
-    
-        if(definition === "PAL") {
-          quotient = Math.floor(framesCount/25) < 10 ? "0"+Math.floor(framesCount / 25) : Math.floor(framesCount / 25);
-          remainder = (framesCount % 25) < 10 ? "0"+Math.floor(framesCount % 25) : Math.floor(framesCount % 25);
-        } else {
-          quotient = Math.floor(framesCount/30) < 10 ? "0"+Math.floor(framesCount / 30) : Math.floor(framesCount / 30);
-          remainder = (framesCount % 30) < 10 ? "0"+Math.floor(framesCount % 30) : Math.floor(framesCount % 30);
-        }
-        
-        var totalFF = quotient+":"+remainder;
-        console.log(totalFF);
-
-      });
-  
-  }
-  
 
   
 }
